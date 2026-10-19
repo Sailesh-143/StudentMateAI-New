@@ -111,6 +111,28 @@ hr{border:0;border-top:1px solid var(--border);margin:22px 0}
   </div>
 </section>
 
+<!-- StudentMate AI Chat Section -->
+<section id="aiChatSection" class="card" style="margin:24px 0; padding:20px;">
+  <h2>💬 AI Chat</h2>
+  <p>Ask StudentMate AI your study doubts!</p>
+
+  <div id="aiChatMessages"
+       style="min-height:120px; max-height:300px; overflow-y:auto; margin:16px 0;">
+    <p>👋 Hi! Ask me anything about your studies.</p>
+  </div>
+
+  <form id="aiChatForm" style="display:flex; gap:8px; flex-wrap:wrap;">
+    <input
+      id="aiChatInput"
+      type="text"
+      placeholder="Type your question..."
+      required
+      style="flex:1; min-width:180px; padding:12px; border-radius:8px;"
+    />
+    <button type="submit" class="btn">Send</button>
+  </form>
+</section>
+
 <section id="workspace" class="workspace hidden" aria-live="polite">
   <h2 id="workspaceTitle">Study space</h2>
   <p id="workspaceDesc"></p>
@@ -372,27 +394,7 @@ function renderPlans(){
   <p>Created by <strong style="color:#7c5cff;">Sailesh</strong></p>
   <p>© 2026 StudentMate AI</p>
 </footer>
-  <!-- StudentMate AI Chat Section -->
-<section id="aiChatSection" class="card" style="margin:24px 0; padding:20px;">
-  <h2>💬 AI Chat</h2>
-  <p>Ask StudentMate AI your study doubts!</p>
-
-  <div id="aiChatMessages"
-       style="min-height:120px; max-height:300px; overflow-y:auto; margin:16px 0;">
-    <p>👋 Hi! Ask me anything about your studies.</p>
-  </div>
-
-  <form id="aiChatForm" style="display:flex; gap:8px; flex-wrap:wrap;">
-    <input
-      id="aiChatInput"
-      type="text"
-      placeholder="Type your question..."
-      required
-      style="flex:1; min-width:180px; padding:12px; border-radius:8px;"
-    />
-    <button type="submit" class="btn">Send</button>
-  </form>
-</section>
+ 
   <script>
 document.getElementById("aiChatForm").addEventListener("submit", async function(event) {
   event.preventDefault();
