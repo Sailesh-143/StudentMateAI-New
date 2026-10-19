@@ -372,5 +372,67 @@ function renderPlans(){
   <p>Created by <strong style="color:#7c5cff;">Sailesh</strong></p>
   <p>© 2026 StudentMate AI</p>
 </footer>
+  <!-- StudentMate AI Chat Section -->
+<section id="aiChatSection" class="card" style="margin:24px 0; padding:20px;">
+  <h2>💬 AI Chat</h2>
+  <p>Ask StudentMate AI your study doubts!</p>
+
+  <div id="aiChatMessages"
+       style="min-height:120px; max-height:300px; overflow-y:auto; margin:16px 0;">
+    <p>👋 Hi! Ask me anything about your studies.</p>
+  </div>
+
+  <form id="aiChatForm" style="display:flex; gap:8px; flex-wrap:wrap;">
+    <input
+      id="aiChatInput"
+      type="text"
+      placeholder="Type your question..."
+      required
+      style="flex:1; min-width:180px; padding:12px; border-radius:8px;"
+    />
+    <button type="submit" class="btn">Send</button>
+  </form>
+</section>
+  <script>
+document.getElementById("aiChatForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const input = document.getElementById("aiChatInput");
+  const messages = document.getElementById("aiChatMessages");
+  const question = input.value.trim();
+
+  if (!question) return;
+
+  const userMsg = document.createElement("p");
+  userMsg.textContent = "You: " + question;
+  messages.appendChild(userMsg);
+  input.value = "";
+
+  const reply = document.createElement("p");
+  reply.textContent = "StudentMate AI: Thinking...";
+  messages.appendChild(reply);
+
+  const button = this.querySelector("button");
+  button.disabled = true;
+
+  try {
+    const response = await fetch("/api/ask", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({question: question, subject: "General"})
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Request failed");
+
+    reply.textContent = "StudentMate AI: " + (data.answer || "No answer received.");
+  } catch (error) {
+    reply.textContent = "Connection error: " + error.message;
+  } finally {
+    button.disabled = false;
+    messages.scrollTop = messages.scrollHeight;
+  }
+});
+</script>
 </body>
 </html>
