@@ -27,7 +27,7 @@ app.post("/api/ask", async (req, res) => {
     }
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.8-flash",
+      model: "gemini-3.6-flash",
       contents: `You are a friendly study tutor.
 Explain clearly for a school student.
 Subject: ${subject}
