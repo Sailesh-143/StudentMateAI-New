@@ -420,6 +420,22 @@ function renderPlans(){
 </footer>
  
   <script>
+
+<script>
+function formatAIAnswer(text) {
+  const safeText = String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  return safeText
+    .replace(/^### (.+)$/gm, "<strong>📌 $1</strong>")
+    .replace(/^## (.+)$/gm, "<strong>✨ $1</strong>")
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/^\s*[-*] (.+)$/gm, "• $1")
+    .replace(/\n/g, "<br>");
+}
+
 document.getElementById("aiChatForm").addEventListener("submit", async function(event) {
   event.preventDefault();
 
@@ -430,12 +446,12 @@ document.getElementById("aiChatForm").addEventListener("submit", async function(
   if (!question) return;
 
   const userMsg = document.createElement("p");
-  userMsg.textContent = "You: " + question;
+  userMsg.textContent = "🧑 You: " + question;
   messages.appendChild(userMsg);
   input.value = "";
 
-  const reply = document.createElement("p");
-  reply.textContent = "StudentMate AI: Thinking...";
+  const reply = document.createElement("div");
+  reply.textContent = "🤖 StudentMate AI is thinking...";
   messages.appendChild(reply);
 
   const button = this.querySelector("button");
@@ -445,20 +461,26 @@ document.getElementById("aiChatForm").addEventListener("submit", async function(
     const response = await fetch("/api/ask", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({question: question, subject: "General"})
+      body: JSON.stringify({
+        question: question,
+        subject: "General"
+      })
     });
 
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || "Request failed");
 
-    reply.textContent = "StudentMate AI: " + (data.answer || "No answer received.");
+    reply.innerHTML = formatAIAnswer(
+      data.answer || "No answer received. Please try again."
+    );
   } catch (error) {
-    reply.textContent = "Connection error: " + error.message;
+    reply.textContent = "⚠️ Connection error: " + error.message;
   } finally {
     button.disabled = false;
     messages.scrollTop = messages.scrollHeight;
   }
 });
 </script>
+
 </body>
 </html>
