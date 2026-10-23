@@ -4,63 +4,296 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StudentMate AI | Your Smart Study Partner</title>
+<meta name="theme-color" content="#080b18">
+<meta name="description" content="StudentMate AI — your personal AI-powered learning companion.">
+<title>StudentMate AI | Learn Beyond Limits</title>
+
 <style>
-:root{--bg:#080b18;--panel:#11172a;--text:#f3f5ff;--muted:#a3acc7;--blue:#7286ff;--cyan:#46e6e0;--border:rgba(255,255,255,.1)}
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--text);background:radial-gradient(ellipse at 10% 0%,#202b62 0,transparent 35%),radial-gradient(ellipse at 90% 20%,#103b48 0,transparent 30%),var(--bg);min-height:100vh}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-header{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 7%;border-bottom:1px solid var(--border);background:rgba(8,11,24,.8);position:sticky;top:0;z-index:5;backdrop-filter:blur(15px)}
-.logo{font-size:21px;font-weight:800;letter-spacing:-.5px}
-.logo span{color:var(--cyan)}
-select,input,textarea{color:var(--text);background:#0b1021;border:1px solid var(--border);border-radius:12px;padding:12px;width:100%;outline:none}
-select:focus,input:focus,textarea:focus{border-color:var(--cyan)}
-header select{width:auto;max-width:160px}
-option{background:#11172a}
-main{width:min(1100px,90%);margin:auto}
-.hero{padding:75px 0 45px}
-.pill{display:inline-block;padding:8px 13px;border-radius:30px;border:1px solid #46517e;color:var(--cyan);background:#151c36;font-size:13px}
-h1{font-size:clamp(38px,6vw,68px);line-height:1.08;margin:22px 0}
-.gradient{background:linear-gradient(90deg,var(--cyan),#8991ff,#d2a3ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-p{color:var(--muted);line-height:1.7}
-.hero p{max-width:650px;font-size:17px}
-.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:25px}
-.btn{border:0;border-radius:12px;padding:12px 17px;color:#fff;font-weight:700;background:linear-gradient(100deg,#667cff,#8c65ed)}
-.btn:hover{filter:brightness(1.13);transform:translateY(-1px)}
-.btn.secondary{background:#1a2340;border:1px solid var(--border)}
-.btn.small{padding:9px 12px;font-size:13px}
-.section-title{margin:45px 0 20px}
-.section-title h2{font-size:28px;margin-bottom:8px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.card,.workspace{background:linear-gradient(145deg,rgba(24,32,57,.96),rgba(12,17,34,.96));border:1px solid var(--border);border-radius:20px;padding:23px;box-shadow:0 12px 45px rgba(0,0,0,.15)}
-.card{transition:.2s}
-.card:hover{border-color:#626fe0;transform:translateY(-3px)}
-.card .emoji{font-size:30px}
-.card h3{margin:13px 0 7px}
-.card p{min-height:48px;font-size:14px}
-.workspace{margin:30px 0 60px}
-.workspace h2{margin-top:0}
-.field{margin:17px 0}
-.field label{display:block;margin-bottom:8px;font-weight:600;font-size:14px}
-textarea{min-height:115px;resize:vertical}
-.result{margin-top:18px;padding:16px;border-radius:14px;background:#0a1021;border:1px solid var(--border);white-space:pre-wrap;line-height:1.7;overflow-wrap:anywhere}
-.item{background:#0b1021;border:1px solid var(--border);border-radius:12px;padding:14px;margin-top:10px}
-.item h4{margin:0 0 7px}
-.item p{margin:5px 0;white-space:pre-wrap;overflow-wrap:anywhere}
-.item-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.muted{color:var(--muted);font-size:13px}
-.done{opacity:.65}
-.done h4{text-decoration:line-through}
-footer{text-align:center;padding:28px 15px;border-top:1px solid var(--border);color:var(--muted);font-size:13px}
-.hidden{display:none!important}
-hr{border:0;border-top:1px solid var(--border);margin:22px 0}
-@media(max-width:650px){header{padding:14px 5%}main{width:90%}.hero{padding-top:48px}.grid{grid-template-columns:1fr}.card p{min-height:0}.workspace{padding:17px}h1{font-size:42px}}
+:root {
+  --bg: #080b18;
+  --panel: rgba(19, 26, 49, .82);
+  --text: #f4f6ff;
+  --muted: #a8b1ce;
+  --blue: #8290ff;
+  --cyan: #53f1e6;
+  --purple: #bb83ff;
+  --border: rgba(255,255,255,.11);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at 10% 0%, #26306b 0, transparent 35%),
+    radial-gradient(ellipse at 95% 30%, #123b49 0, transparent 28%),
+    var(--bg);
+  min-height: 100vh;
+}
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+button:disabled { opacity: .6; cursor: wait; }
+a { color: inherit; text-decoration: none; }
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 17px 7%;
+  border-bottom: 1px solid var(--border);
+  background: rgba(8,11,24,.84);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(18px);
+}
+.logo { font-size: 21px; font-weight: 850; letter-spacing: -.7px; }
+.logo span { color: var(--cyan); }
+select, input, textarea {
+  width: 100%;
+  color: var(--text);
+  background: #0b1021;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  outline: none;
+}
+select:focus, input:focus, textarea:focus {
+  border-color: var(--cyan);
+}
+option { background: #11172a; }
+header select { width: auto; max-width: 150px; }
+main { width: min(1120px, 90%); margin: auto; }
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  align-items: center;
+  gap: 36px;
+  padding: 82px 0 65px;
+}
+.pill {
+  display: inline-block;
+  padding: 8px 13px;
+  border-radius: 30px;
+  border: 1px solid #46517e;
+  color: var(--cyan);
+  background: rgba(21,28,54,.8);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+h1 {
+  font-size: clamp(42px, 6vw, 70px);
+  line-height: 1.05;
+  letter-spacing: -2.5px;
+  margin: 22px 0;
+}
+.gradient {
+  background: linear-gradient(100deg, var(--cyan), #9299ff, #d4a3ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+p { color: var(--muted); line-height: 1.75; }
+.hero-copy > p { max-width: 600px; font-size: 17px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 25px; }
+.btn {
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 13px 18px;
+  color: #fff;
+  font-weight: 750;
+  background: linear-gradient(105deg, #687dff, #9864ed);
+  transition: transform .2s, filter .2s;
+}
+.btn:hover { filter: brightness(1.12); transform: translateY(-2px); }
+.btn.secondary {
+  background: rgba(26,35,64,.8);
+  border-color: var(--border);
+}
+.btn.small { padding: 10px 13px; font-size: 13px; }
+.hero-visual {
+  position: relative;
+  padding: 25px;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.orb {
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #a3fff6, #7580ff 35%, #9b5cdb 65%, #18214c);
+  filter: drop-shadow(0 0 55px rgba(104,124,255,.45));
+  animation: float 5s ease-in-out infinite;
+}
+.orb::after {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  border: 1px solid rgba(131,228,255,.38);
+  border-radius: 50%;
+  transform: rotateX(65deg) rotateZ(-20deg);
+}
+.orb-core {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 130px;
+  height: 130px;
+  border-radius: 36px;
+  background: rgba(8,11,24,.3);
+  border: 1px solid rgba(255,255,255,.35);
+  box-shadow: inset 0 0 35px rgba(255,255,255,.1);
+  font-size: 55px;
+  backdrop-filter: blur(8px);
+}
+.floating-tag {
+  position: absolute;
+  z-index: 2;
+  padding: 10px 13px;
+  background: rgba(17,23,42,.93);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  font-size: 12px;
+  box-shadow: 0 12px 35px rgba(0,0,0,.2);
+}
+.tag-one { top: 28px; right: 0; }
+.tag-two { bottom: 28px; left: 0; }
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(4deg); }
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 10px 0 55px;
+}
+.stat {
+  padding: 18px;
+  border: 1px solid var(--border);
+  background: rgba(16,22,42,.6);
+  border-radius: 15px;
+}
+.stat strong { display: block; font-size: 17px; margin-bottom: 5px; }
+.stat span { color: var(--muted); font-size: 12px; }
+.section-title { margin: 48px 0 22px; }
+.section-title h2 { font-size: clamp(25px, 4vw, 34px); margin-bottom: 8px; }
+.section-title p { margin-top: 0; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+.card, .workspace {
+  background: linear-gradient(145deg, rgba(24,32,57,.94), rgba(12,17,34,.96));
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 23px;
+  box-shadow: 0 12px 45px rgba(0,0,0,.13);
+}
+.card { transition: .22s; }
+.card:hover { border-color: #737ef1; transform: translateY(-4px); }
+.card .emoji { font-size: 31px; }
+.card h3 { margin: 15px 0 7px; }
+.card p { font-size: 14px; min-height: 68px; }
+.card-label {
+  display: inline-block;
+  color: var(--cyan);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  margin-top: 12px;
+}
+.card.future {
+  background: linear-gradient(145deg, rgba(26,25,55,.7), rgba(12,17,34,.9));
+}
+.workspace { margin: 34px 0 65px; scroll-margin-top: 90px; }
+.workspace h2 { margin-top: 0; }
+.field { margin: 17px 0; }
+.field label { display: block; margin-bottom: 8px; font-weight: 650; font-size: 14px; }
+textarea { min-height: 120px; resize: vertical; }
+.result {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #0a1021;
+  border: 1px solid var(--border);
+  white-space: pre-wrap;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.chat-messages {
+  min-height: 150px;
+  max-height: 420px;
+  overflow-y: auto;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 12px;
+  background: rgba(8,12,27,.6);
+}
+.chat-bubble {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  padding: 12px;
+  border-radius: 12px;
+  margin: 9px 0;
+  line-height: 1.65;
+}
+.chat-bubble.user { background: rgba(124,92,255,.18); }
+.chat-bubble.assistant { background: rgba(128,128,128,.12); }
+.item {
+  background: #0b1021;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  margin-top: 10px;
+}
+.item h4 { margin: 0 0 7px; }
+.item p { margin: 5px 0; overflow-wrap: anywhere; }
+.item-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.done { opacity: .65; }
+.done h4 { text-decoration: line-through; }
+.muted { color: var(--muted); font-size: 13px; }
+.hidden { display: none !important; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 22px 0; }
+footer {
+  text-align: center;
+  padding: 30px 15px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 13px;
+}
+@media (max-width: 800px) {
+  .hero { grid-template-columns: 1fr; padding-top: 55px; gap: 5px; }
+  .hero-visual { min-height: 280px; }
+  .grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 560px) {
+  header { padding: 14px 5%; }
+  .logo { font-size: 18px; }
+  main { width: 90%; }
+  h1 { font-size: 43px; letter-spacing: -1.5px; }
+  .grid, .stats { grid-template-columns: 1fr; }
+  .card p { min-height: 0; }
+  .workspace, .card { padding: 18px; }
+  .hero-visual { min-height: 250px; }
+  .orb { width: 185px; height: 185px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
 </style>
 </head>
+
 <body>
 <header>
-  <div class="logo">StudentMate <span>AI ✦</span></div>
+  <a class="logo" href="#home">StudentMate <span>AI ✦</span></a>
   <select id="language" aria-label="Language" onchange="changeLanguage()">
     <option value="en">English</option>
     <option value="ta">தமிழ்</option>
@@ -72,412 +305,509 @@ hr{border:0;border-top:1px solid var(--border);margin:22px 0}
 </header>
 
 <main>
-<section class="hero" id="home">
-  <span class="pill" data-t="tag">✦ YOUR PERSONAL STUDY COMPANION</span>
-  <h1><span data-t="hero1">Study smarter.</span><br><span class="gradient" data-t="hero2">Dream bigger.</span></h1>
-  <p data-t="intro">Your personal study space for solving doubts, making revision notes, practising flashcards and planning your study time.</p>
-  <div class="actions">
-    <button class="btn" onclick="openFeature('doubt')" data-t="start">Start studying →</button>
-    <button class="btn secondary" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})" data-t="explore">Explore features</button>
-  </div>
-</section>
+  <section class="hero" id="home">
+    <div class="hero-copy">
+      <span class="pill" data-t="tag">✦ YOUR AI LEARNING COMPANION</span>
+      <h1>
+        <span data-t="hero1">Your ideas.</span><br>
+        <span class="gradient" data-t="hero2">AI-powered future.</span>
+      </h1>
+      <p data-t="intro">
+        Meet a new way to learn. Ask questions, explore ideas and make every
+        study session count with your personal AI learning companion.
+      </p>
+      <div class="actions">
+        <button class="btn" onclick="openFeature('chat')" data-t="start">Meet your AI →</button>
+        <button class="btn secondary" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})" data-t="explore">Explore platform</button>
+      </div>
+    </div>
 
-<section id="features">
-  <div class="section-title">
-    <h2 data-t="toolsTitle">Your study toolkit</h2>
-    <p data-t="toolsDesc">Everything you need, organised in one place.</p>
-  </div>
-  <div class="grid">
-    <article class="card">
-      <div class="emoji">🤖</div><h3 data-t="doubtTitle">AI Doubt Solver</h3>
-      <p data-t="doubtDesc">Ask a question and get an AI explanation.</p>
-      <button class="btn small" onclick="openFeature('doubt')" data-t="open">Open tool →</button>
-    </article>
-    <article class="card">
-      <div class="emoji">📚</div><h3 data-t="revisionTitle">Smart Revision</h3>
-      <p data-t="revisionDesc">Save topic-wise revision notes.</p>
-      <button class="btn small" onclick="openFeature('revision')" data-t="open">Open tool →</button>
-    </article>
-    <article class="card">
-      <div class="emoji">🃏</div><h3 data-t="flashTitle">Flashcards & Practice</h3>
-      <p data-t="flashDesc">Create question-and-answer cards.</p>
-      <button class="btn small" onclick="openFeature('flashcards')" data-t="open">Open tool →</button>
-    </article>
-    <article class="card">
-      <div class="emoji">📅</div><h3 data-t="plannerTitle">Study Planner</h3>
-      <p data-t="plannerDesc">Plan tasks and track your progress.</p>
-      <button class="btn small" onclick="openFeature('planner')" data-t="open">Open tool →</button>
-    </article>
-  </div>
-</section>
+    <div class="hero-visual" aria-label="StudentMate AI graphic">
+      <div class="orb"></div>
+      <div class="orb-core">✦</div>
+      <div class="floating-tag tag-one">✧ AI Study Partner</div>
+      <div class="floating-tag tag-two">∞ Keep discovering</div>
+    </div>
+  </section>
 
-<!-- StudentMate AI Chat Section -->
-<section id="aiChatSection" class="card" style="margin:24px 0; padding:20px;">
-  <h2>💬 AI Chat</h2>
-  <p>Ask StudentMate AI your study doubts!</p>
-  
-<div class="card" style="margin:16px 0; padding:16px; background:rgba(59,130,246,0.08);">
-  <h3>💡 Hints for Users</h3>
+  <section class="stats" aria-label="Platform highlights">
+    <div class="stat"><strong>🤖 AI-powered</strong><span data-t="stat1">Study support</span></div>
+    <div class="stat"><strong>🌏 Multilingual</strong><span data-t="stat2">Learn your way</span></div>
+    <div class="stat"><strong>💡 Made for students</strong><span data-t="stat3">Curiosity comes first</span></div>
+  </section>
 
-  <p><strong>1. Ask Study-Related Doubts</strong><br>
-  Idhu ChatGPT, Gemini maadhiri periya AI app illa. Neenga unga study-related doubts-ai mattum inga kekkalam.</p>
+  <section id="features">
+    <div class="section-title">
+      <span class="pill" data-t="sectionTag">YOUR LEARNING SPACE</span>
+      <h2 data-t="toolsTitle">One platform. More possibilities.</h2>
+      <p data-t="toolsDesc">Start with the tools that help you learn today.</p>
+    </div>
 
-  <p><strong>2. Keep the Chat Useful</strong><br>
-  Neenga friendly-ah pesalam, aana unnecessary talks avoid pannunga.</p>
+    <div class="grid">
+      <article class="card">
+        <div class="emoji">🧠</div>
+        <h3 data-t="doubtTitle">AI Doubt Solver</h3>
+        <p data-t="doubtDesc">Ask a question and get a clear, helpful AI explanation.</p>
+        <button class="btn small" onclick="openFeature('doubt')" data-t="open">Solve a doubt →</button>
+        <div class="card-label" data-t="available">Available now</div>
+      </article>
 
-  <p><strong>3. Think Before You Ask</strong><br>
-  Enna doubt kekkanum nu oru idea pannittu kelunga. Suma edhavadhu kekkanum-nu random-ah questions kekka vendam.</p>
-  
-<p><strong>4. Avoid Unnecessary Messages</strong><br>
-Neenga study-related illaadha messages mattum anuppina, answer varama error varalaam.</p>
+      <article class="card">
+        <div class="emoji">💬</div>
+        <h3 data-t="chatTitle">StudentMate AI Chat</h3>
+        <p data-t="chatDesc">Ask follow-up questions and explore a topic with your AI study partner.</p>
+        <button class="btn small" onclick="openFeature('chat')" data-t="chatOpen">Start chatting →</button>
+        <div class="card-label" data-t="available">Available now</div>
+      </article>
 
-<p><strong>5. Ask a Complete Question</strong><br>
-Example: "Heyy nanba" illa "Heyy macha" nu mattum type pannina, AI-ku answer panna study doubt kidaikkadhu; error varalaam.</p>
+      <article class="card">
+        <div class="emoji">🗓️</div>
+        <h3 data-t="plannerTitle">Study Planner</h3>
+        <p data-t="plannerDesc">Organise your study tasks and track what you have completed.</p>
+        <button class="btn small" onclick="openFeature('planner')" data-t="plannerOpen">Plan my study →</button>
+        <div class="card-label" data-t="available">Available now</div>
+      </article>
 
-<p><strong>6. Friendly Words Are Welcome!</strong><br>
-Unga study doubt kekkumbodhu, adhukooda friendly words use pannalaam. Adhula problem illa!</p>
+      <article class="card future">
+        <div class="emoji">📸</div>
+        <h3 data-t="photoTitle">Ask with a Photo</h3>
+        <p data-t="photoDesc">A future feature for getting help with questions from an image.</p>
+        <div class="card-label" data-t="coming">Coming in a future update</div>
+      </article>
 
-</div>
+      <article class="card future">
+        <div class="emoji">🎙️</div>
+        <h3 data-t="voiceTitle">Voice Study Buddy</h3>
+        <p data-t="voiceDesc">A planned voice experience for learning in a more natural way.</p>
+        <div class="card-label" data-t="coming">Coming in a future update</div>
+      </article>
 
+      <article class="card">
+        <div class="emoji">🌌</div>
+        <h3 data-t="visionTitle">Learn Beyond Limits</h3>
+        <p data-t="visionDesc">A student-first learning space built to grow with your ideas.</p>
+        <button class="btn small secondary" onclick="openFeature('chat')" data-t="exploreAI">Explore AI →</button>
+      </article>
+    </div>
+  </section>
 
-  <div id="aiChatMessages"
-       style="min-height:120px; max-height:300px; overflow-y:auto; margin:16px 0;">
-    <p>👋 Hi! Ask me anything about your studies.</p>
-  </div>
-
-  <form id="aiChatForm" style="display:flex; gap:8px; flex-wrap:wrap;">
-    <input
-      id="aiChatInput"
-      type="text"
-      placeholder="Type your question..."
-      required
-      style="flex:1; min-width:180px; padding:12px; border-radius:8px;"
-    />
-    <button type="submit" class="btn">Send</button>
-  </form>
-</section>
-
-<section id="workspace" class="workspace hidden" aria-live="polite">
-  <h2 id="workspaceTitle">Study space</h2>
-  <p id="workspaceDesc"></p>
-  <div id="workspaceContent"></div>
-  <hr>
-  <button class="btn secondary" onclick="closeFeature()" data-t="back">← Back to home</button>
-</section>
+  <section id="workspace" class="workspace hidden" aria-live="polite">
+    <h2 id="workspaceTitle">Your learning space</h2>
+    <p id="workspaceDesc"></p>
+    <div id="workspaceContent"></div>
+    <hr>
+    <button class="btn secondary" onclick="closeFeature()" data-t="back">← Back to home</button>
+  </section>
 </main>
 
 <footer>
-  <div>✦ StudentMate AI</div>
+  <div class="logo">StudentMate <span>AI ✦</span></div>
   <p data-t="footer">Built for curious minds. Learn a little every day.</p>
-  <span class="muted">Your notes and tasks are stored in this browser on this device.</span>
+  <p>Made with ❤️ by <strong>Sailesh</strong></p>
+  <span class="muted">© 2026 StudentMate AI</span>
 </footer>
 
 <script>
 const translations = {
-en:{
-tag:"✦ YOUR PERSONAL STUDY COMPANION",hero1:"Study smarter.",hero2:"Dream bigger.",
-intro:"Your personal study space for solving doubts, making revision notes, practising flashcards and planning your study time.",
-start:"Start studying →",explore:"Explore features",toolsTitle:"Your study toolkit",toolsDesc:"Everything you need, organised in one place.",
-doubtTitle:"AI Doubt Solver",doubtDesc:"Ask a question and get an AI explanation.",
-revisionTitle:"Smart Revision",revisionDesc:"Save topic-wise revision notes.",
-flashTitle:"Flashcards & Practice",flashDesc:"Create question-and-answer cards.",
-plannerTitle:"Study Planner",plannerDesc:"Add tasks and track completed work.",
-open:"Open tool →",back:"← Back to home",footer:"Built for curious minds. Learn a little every day.",
-subject:"Subject",question:"Your question",ask:"Ask AI",topic:"Topic name",notes:"Your revision notes",save:"Save",savedNotes:"Saved revision notes",noNotes:"No notes saved yet.",
-cardQ:"Question",cardA:"Answer",addCard:"Add flashcard",savedCards:"Your flashcards",reveal:"Reveal answer",hideAnswer:"Hide answer",noCards:"No flashcards yet.",
-task:"Study task",date:"Target date",addTask:"Add task",tasks:"Your tasks",noTasks:"No tasks yet.",complete:"Complete",undo:"Undo",remove:"Delete",
-enterQuestion:"Please enter a question first.",demoTitle:"AI Answer",demoText:"",saved:"Saved successfully!",fillFields:"Please fill in both fields.",fillTask:"Please enter a task.",
-doubtDescFull:"Ask a study question and receive an AI-generated explanation.",revisionDescFull:"Write short notes for each topic. Your notes stay saved in this browser.",
-flashDescFull:"Create your own question-and-answer cards. Reveal the answer when ready.",plannerDescFull:"Plan what you want to study and mark tasks complete when finished."
-},
-ta:{
-tag:"✦ உனக்கான தனிப்பட்ட படிப்பு நண்பன்",hero1:"புத்திசாலித்தனமாக படி.",hero2:"பெரிய கனவு காண்.",
-intro:"சந்தேகங்களைத் தீர்க்கவும், குறிப்புகளைச் சேமிக்கவும், Flashcards பயிற்சி செய்யவும், படிப்பைத் திட்டமிடவும் ஒரே இடம்.",
-start:"படிக்கத் தொடங்கு →",explore:"வசதிகளைப் பார்",toolsTitle:"உன் படிப்புக் கருவிகள்",toolsDesc:"உனக்குத் தேவையான அனைத்தும் ஒரே இடத்தில்.",
-doubtTitle:"AI சந்தேகத் தீர்வு",doubtDesc:"கேள்வியைக் கேட்டு AI விளக்கத்தைப் பெறு.",revisionTitle:"மறுபார்வைக் குறிப்புகள்",revisionDesc:"பாடவாரியாக உன் குறிப்புகளைச் சேமி.",
-flashTitle:"Flashcards பயிற்சி",flashDesc:"கேள்வி-பதில் அட்டைகளை உருவாக்கு.",plannerTitle:"படிப்புத் திட்டம்",plannerDesc:"படிக்க வேண்டிய பணிகளைச் சேர்த்து முடித்தவற்றைக் குறி.",
-open:"திறக்கவும் →",back:"← முகப்புக்குத் திரும்பு",footer:"தினமும் கொஞ்சம் கற்போம்.",
-subject:"பாடம்",question:"உன் கேள்வி",ask:"AI-யிடம் கேள்",topic:"தலைப்பு",notes:"மறுபார்வைக் குறிப்புகள்",save:"சேமி",savedNotes:"சேமித்த குறிப்புகள்",noNotes:"குறிப்புகள் இன்னும் இல்லை.",
-cardQ:"கேள்வி",cardA:"பதில்",addCard:"Flashcard சேர்",savedCards:"உன் Flashcards",reveal:"பதிலைக் காட்டு",hideAnswer:"பதிலை மறை",noCards:"Flashcards இன்னும் இல்லை.",
-task:"படிக்க வேண்டிய பணி",date:"தேதி",addTask:"பணி சேர்",tasks:"உன் பணிகள்",noTasks:"பணிகள் இன்னும் இல்லை.",complete:"முடிந்தது",undo:"மீண்டும் செய்",remove:"நீக்கு",
-enterQuestion:"முதலில் கேள்வியை உள்ளிடு.",demoTitle:"AI பதில்",demoText:"",saved:"வெற்றிகரமாகச் சேமிக்கப்பட்டது!",fillFields:"இரண்டு இடங்களையும் நிரப்பு.",fillTask:"ஒரு பணியை உள்ளிடு.",
-doubtDescFull:"உன் படிப்பு சந்தேகத்தைக் கேட்டு AI விளக்கத்தைப் பெறு.",revisionDescFull:"ஒவ்வொரு தலைப்பிற்கும் சிறு குறிப்புகளை எழுதி சேமி.",
-flashDescFull:"உன் கேள்வி-பதில் அட்டைகளை உருவாக்கு.",plannerDescFull:"படிக்க வேண்டியவற்றைத் திட்டமிட்டு முடித்தவற்றைக் குறி."
-}
+  en: {
+    tag:"✦ YOUR AI LEARNING COMPANION",
+    hero1:"Your ideas.", hero2:"AI-powered future.",
+    intro:"Meet a new way to learn. Ask questions, explore ideas and make every study session count with your personal AI learning companion.",
+    start:"Meet your AI →", explore:"Explore platform",
+    stat1:"Study support", stat2:"Learn your way", stat3:"Curiosity comes first",
+    sectionTag:"YOUR LEARNING SPACE",
+    toolsTitle:"One platform. More possibilities.",
+    toolsDesc:"Start with the tools that help you learn today.",
+    doubtTitle:"AI Doubt Solver",
+    doubtDesc:"Ask a question and get a clear, helpful AI explanation.",
+    chatTitle:"StudentMate AI Chat",
+    chatDesc:"Ask follow-up questions and explore a topic with your AI study partner.",
+    plannerTitle:"Study Planner",
+    plannerDesc:"Organise your study tasks and track what you have completed.",
+    photoTitle:"Ask with a Photo",
+    photoDesc:"A future feature for getting help with questions from an image.",
+    voiceTitle:"Voice Study Buddy",
+    voiceDesc:"A planned voice experience for learning in a more natural way.",
+    visionTitle:"Learn Beyond Limits",
+    visionDesc:"A student-first learning space built to grow with your ideas.",
+    available:"Available now", coming:"Coming in a future update",
+    open:"Solve a doubt →", chatOpen:"Start chatting →",
+    plannerOpen:"Plan my study →", exploreAI:"Explore AI →",
+    back:"← Back to home", footer:"Built for curious minds. Learn a little every day.",
+    subject:"Subject", question:"Your question", ask:"Ask AI",
+    enterQuestion:"Please enter a question first.",
+    chatWelcome:"Hey! 👋 What would you like to learn today?",
+    chatPlaceholder:"Type your question here...",
+    send:"Send", thinking:"Thinking...",
+    chatError:"Connection error: ",
+    task:"Study task", date:"Target date", addTask:"Add task",
+    tasks:"Your tasks", noTasks:"No tasks yet.",
+    complete:"Complete", undo:"Undo", remove:"Delete",
+    fillTask:"Please enter a task.", saved:"Saved successfully!",
+    doubtDescFull:"Ask a study question and receive an AI-generated explanation.",
+    chatDescFull:"Ask questions and continue your conversation with StudentMate AI.",
+    plannerDescFull:"Add your study tasks and mark them complete when finished."
+  },
+  ta: {
+    tag:"✦ உனக்கான AI கற்றல் நண்பன்",
+    hero1:"உன் சிந்தனை.", hero2:"AI-யின் புதிய உலகம்.",
+    intro:"புதிய முறையில் கற்றுக்கொள். கேள்விகளைக் கேள், புதிய விஷயங்களை ஆராய், AI கற்றல் நண்பனுடன் படிப்பை எளிதாக்கு.",
+    start:"AI-யை சந்திப்போம் →", explore:"வசதிகளைப் பார்",
+    stat1:"படிப்பு உதவி", stat2:"உனக்குப் பிடித்த மொழி", stat3:"ஆர்வமே முதலில்",
+    sectionTag:"உன் கற்றல் உலகம்",
+    toolsTitle:"ஒரே தளம். பல வாய்ப்புகள்.",
+    toolsDesc:"உன் படிப்புக்கு உதவும் வசதிகளைப் பயன்படுத்தத் தொடங்கு.",
+    doubtTitle:"AI சந்தேகத் தீர்வு",
+    doubtDesc:"கேள்வியைக் கேட்டு தெளிவான AI விளக்கத்தைப் பெறு.",
+    chatTitle:"StudentMate AI Chat",
+    chatDesc:"தொடர்ந்து கேள்விகள் கேட்டு AI நண்பனுடன் ஒரு தலைப்பைக் கற்றுக்கொள்.",
+    plannerTitle:"படிப்புத் திட்டம்",
+    plannerDesc:"படிக்க வேண்டிய பணிகளைச் சேர்த்து முடித்தவற்றைக் குறி.",
+    photoTitle:"படத்துடன் கேள்",
+    photoDesc:"படத்தில் உள்ள கேள்விகளுக்கு உதவும் வசதி எதிர்காலத்தில் வரவுள்ளது.",
+    voiceTitle:"Voice Study Buddy",
+    voiceDesc:"இயல்பாகக் கற்க உதவும் குரல் வசதி எதிர்காலத்தில் திட்டமிடப்பட்டுள்ளது.",
+    visionTitle:"எல்லைகளைத் தாண்டிக் கற்போம்",
+    visionDesc:"மாணவர்களின் சிந்தனையுடன் வளரக்கூடிய கற்றல் தளம்.",
+    available:"இப்போது கிடைக்கிறது", coming:"எதிர்கால புதுப்பிப்பில்",
+    open:"சந்தேகம் கேள் →", chatOpen:"Chat தொடங்கு →",
+    plannerOpen:"திட்டமிடு →", exploreAI:"AI-யைப் பார் →",
+    back:"← முகப்புக்குத் திரும்பு",
+    footer:"ஆர்வமுள்ள மாணவர்களுக்காக. தினமும் கொஞ்சம் கற்போம்.",
+    subject:"பாடம்", question:"உன் கேள்வி", ask:"AI-யிடம் கேள்",
+    enterQuestion:"முதலில் ஒரு கேள்வியை உள்ளிடு.",
+    chatWelcome:"வணக்கம்! 👋 இன்று என்ன கற்றுக்கொள்ள விரும்புகிறாய்?",
+    chatPlaceholder:"உன் கேள்வியை இங்கே எழுது...",
+    send:"அனுப்பு", thinking:"பதில் தயாராகிறது...",
+    chatError:"இணைப்புப் பிழை: ",
+    task:"படிக்க வேண்டிய பணி", date:"இலக்கு தேதி",
+    addTask:"பணி சேர்", tasks:"உன் பணிகள்",
+    noTasks:"பணிகள் இன்னும் இல்லை.", complete:"முடிந்தது",
+    undo:"மீண்டும் செய்", remove:"நீக்கு",
+    fillTask:"ஒரு பணியை உள்ளிடு.", saved:"வெற்றிகரமாகச் சேமிக்கப்பட்டது!",
+    doubtDescFull:"உன் படிப்பு சந்தேகத்தைக் கேட்டு AI விளக்கத்தைப் பெறு.",
+    chatDescFull:"StudentMate AI-யிடம் கேள்விகள் கேட்டு உரையாடலைத் தொடரலாம்.",
+    plannerDescFull:"படிக்க வேண்டிய பணிகளைச் சேர்த்து முடித்தவற்றைக் குறி."
+  }
 };
 
-const defaultLang={
-hi:{tag:"✦ आपका निजी अध्ययन साथी",hero1:"समझदारी से पढ़ें।",hero2:"बड़े सपने देखें।",intro:"सवालों, नोट्स, फ्लैशकार्ड और पढ़ाई की योजना के लिए आपकी निजी जगह।",start:"पढ़ना शुरू करें →",explore:"सुविधाएँ देखें",toolsTitle:"आपके अध्ययन उपकरण",toolsDesc:"पढ़ाई की सभी ज़रूरी चीज़ें एक जगह।",doubtTitle:"AI प्रश्न सहायक",doubtDesc:"सवाल पूछें और AI से जवाब पाएँ।",revisionTitle:"रिविज़न नोट्स",revisionDesc:"विषय के अनुसार नोट्स सेव करें।",flashTitle:"फ्लैशकार्ड अभ्यास",flashDesc:"प्रश्न-उत्तर कार्ड बनाएं।",plannerTitle:"अध्ययन योजना",plannerDesc:"काम जोड़ें और पूरा होने पर चिह्नित करें।",open:"खोलें →",back:"← होम पर जाएँ",footer:"हर दिन थोड़ा सीखें।"},
-te:{tag:"✦ మీ వ్యక్తిగత చదువు సహచరుడు",hero1:"తెలివిగా చదవండి.",hero2:"పెద్ద కలలు కనండి.",intro:"ప్రశ్నలు, నోట్స్, ఫ్లాష్‌కార్డులు, చదువు ప్రణాళిక కోసం మీ ప్రత్యేక స్థలం.",start:"చదవడం ప్రారంభించండి →",explore:"ఫీచర్లు చూడండి",toolsTitle:"మీ చదువు సాధనాలు",toolsDesc:"చదువుకు అవసరమైనవి ఒకే చోట.",doubtTitle:"AI సందేహ సహాయకుడు",doubtDesc:"ప్రశ్న అడిగి AI సమాధానం పొందండి.",revisionTitle:"రివిజన్ నోట్స్",revisionDesc:"విషయం వారీగా నోట్స్ సేవ్ చేయండి.",flashTitle:"ఫ్లాష్‌కార్డుల సాధన",flashDesc:"ప్రశ్న-జవాబు కార్డులు తయారు చేయండి.",plannerTitle:"చదువు ప్రణాళిక",plannerDesc:"పనులు జోడించి పూర్తయిన వాటిని గుర్తించండి.",open:"తెరవండి →",back:"← హోమ్‌కు తిరిగి వెళ్లండి",footer:"ప్రతిరోజూ కొంచెం నేర్చుకోండి."},
-kn:{tag:"✦ ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಅಧ್ಯಯನ ಸಂಗಾತಿ",hero1:"ಚೆನ್ನಾಗಿ ಓದಿ.",hero2:"ದೊಡ್ಡ ಕನಸು ಕಾಣಿ.",intro:"ಪ್ರಶ್ನೆಗಳು, ಟಿಪ್ಪಣಿಗಳು, ಫ್ಲ್ಯಾಶ್‌ಕಾರ್ಡ್‌ಗಳು ಮತ್ತು ಅಧ್ಯಯನ ಯೋಜನೆಗಾಗಿ ನಿಮ್ಮ ಸ್ಥಳ.",start:"ಓದಲು ಪ್ರಾರಂಭಿಸಿ →",explore:"ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ನೋಡಿ",toolsTitle:"ನಿಮ್ಮ ಅಧ್ಯಯನ ಸಾಧನಗಳು",toolsDesc:"ಅಧ್ಯಯನಕ್ಕೆ ಬೇಕಾದ ಎಲ್ಲವೂ ಒಂದೇ ಸ್ಥಳದಲ್ಲಿ.",doubtTitle:"AI ಪ್ರಶ್ನೆ ಸಹಾಯಕ",doubtDesc:"ಪ್ರಶ್ನೆ ಕೇಳಿ AI ಉತ್ತರ ಪಡೆಯಿರಿ.",revisionTitle:"ಪುನರಾವರ್ತನೆ ಟಿಪ್ಪಣಿಗಳು",revisionDesc:"ವಿಷಯವಾರು ಟಿಪ್ಪಣಿಗಳನ್ನು ಉಳಿಸಿ.",flashTitle:"ಫ್ಲ್ಯಾಶ್‌ಕಾರ್ಡ್ ಅಭ್ಯಾಸ",flashDesc:"ಪ್ರಶ್ನೆ-ಉತ್ತರ ಕಾರ್ಡ್‌ಗಳನ್ನು ರಚಿಸಿ.",plannerTitle:"ಅಧ್ಯಯನ ಯೋಜನೆ",plannerDesc:"ಕೆಲಸಗಳನ್ನು ಸೇರಿಸಿ ಪೂರ್ಣವಾದವುಗಳನ್ನು ಗುರುತಿಸಿ.",open:"ತೆರೆಯಿರಿ →",back:"← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ",footer:"ಪ್ರತಿದಿನ ಸ್ವಲ್ಪ ಕಲಿಯಿರಿ."},
-ml:{tag:"✦ നിങ്ങളുടെ വ്യക്തിഗത പഠന കൂട്ടുകാരൻ",hero1:"ബുദ്ധിപൂർവ്വം പഠിക്കൂ.",hero2:"വലിയ സ്വപ്നങ്ങൾ കാണൂ.",intro:"ചോദ്യങ്ങൾ, കുറിപ്പുകൾ, ഫ്ലാഷ്‌കാർഡുകൾ, പഠന പദ്ധതി എന്നിവയ്ക്കുള്ള നിങ്ങളുടെ ഇടം.",start:"പഠനം തുടങ്ങൂ →",explore:"സവിശേഷതകൾ കാണൂ",toolsTitle:"നിങ്ങളുടെ പഠന ഉപകരണങ്ങൾ",toolsDesc:"പഠനത്തിന് ആവശ്യമായതെല്ലാം ഒരിടത്ത്.",doubtTitle:"AI സംശയ സഹായി",doubtDesc:"ചോദ്യം ചോദിച്ച് AI ഉത്തരം നേടൂ.",revisionTitle:"ആവർത്തന കുറിപ്പുകൾ",revisionDesc:"വിഷയാടിസ്ഥാനത്തിൽ കുറിപ്പുകൾ സൂക്ഷിക്കൂ.",flashTitle:"ഫ്ലാഷ്‌കാർഡ് പരിശീലനം",flashDesc:"ചോദ്യോത്തര കാർഡുകൾ തയ്യാറാക്കൂ.",plannerTitle:"പഠന പദ്ധതി",plannerDesc:"ജോലികൾ ചേർത്ത് പൂർത്തിയായവ അടയാളപ്പെടുത്തൂ.",open:"തുറക്കൂ →",back:"← ഹോമിലേക്ക് മടങ്ങൂ",footer:"എല്ലാ ദിവസവും കുറച്ച് പഠിക്കൂ."}
-};
-
-function t(key){
- const lang=document.getElementById("language").value;
- return (translations[lang]&&translations[lang][key])||
-        (defaultLang[lang]&&defaultLang[lang][key])||
-        translations.en[key]||key;
-}
-function changeLanguage(){
- const lang=document.getElementById("language").value;
- document.documentElement.lang=lang;
- document.querySelectorAll("[data-t]").forEach(el=>el.textContent=t(el.dataset.t));
- if(!document.getElementById("workspace").classList.contains("hidden")&&currentFeature)openFeature(currentFeature,false);
-}
-function readStore(key){
- try{return JSON.parse(localStorage.getItem(key)||"[]")}catch{return []}
-}
-function writeStore(key,value){
- try{localStorage.setItem(key,JSON.stringify(value));return true}
- catch{alert("Could not save. Browser storage may be full or disabled.");return false}
-}
-let currentFeature="";
-
-function openFeature(type,shouldScroll=true){
- currentFeature=type;
- document.getElementById("workspace").classList.remove("hidden");
- document.getElementById("workspaceTitle").textContent=({doubt:t("doubtTitle"),revision:t("revisionTitle"),flashcards:t("flashTitle"),planner:t("plannerTitle")})[type];
- document.getElementById("workspaceDesc").textContent=({doubt:t("doubtDescFull"),revision:t("revisionDescFull"),flashcards:t("flashDescFull"),planner:t("plannerDescFull")})[type];
- const content=document.getElementById("workspaceContent");
- if(type==="doubt"){
-  content.innerHTML=`
-  <div class="field"><label for="subject">${t("subject")}</label>
-  <select id="subject" style="width:100%">
-  <option>Computer Science</option><option>Mathematics</option><option>Physics</option><option>Chemistry</option><option>English</option><option>Tamil</option><option>Other</option>
-  </select></div>
-  <div class="field"><label for="question">${t("question")}</label>
-  <textarea id="question" placeholder="Ask your study question here..."></textarea></div>
-  <button class="btn" id="askButton" onclick="askDoubt()">${t("ask")}</button>
-  <div id="doubtResult" class="result hidden"></div>`;
- }else if(type==="revision"){
-  content.innerHTML=`
-  <div class="field"><label for="topic">${t("topic")}</label><input id="topic" placeholder="Example: C++ loops"></div>
-  <div class="field"><label for="notes">${t("notes")}</label><textarea id="notes" placeholder="Write your key points here..."></textarea></div>
-  <button class="btn" onclick="saveRevision()">${t("save")}</button><hr><h3>${t("savedNotes")}</h3><div id="revisionList"></div>`;
-  renderRevisions();
- }else if(type==="flashcards"){
-  content.innerHTML=`
-  <div class="field"><label for="flashQ">${t("cardQ")}</label><input id="flashQ" placeholder="Write a question"></div>
-  <div class="field"><label for="flashA">${t("cardA")}</label><textarea id="flashA" placeholder="Write the answer"></textarea></div>
-  <button class="btn" onclick="saveFlashcard()">${t("addCard")}</button><hr><h3>${t("savedCards")}</h3><div id="flashList"></div>`;
-  renderFlashcards();
- }else if(type==="planner"){
-  content.innerHTML=`
-  <div class="field"><label for="task">${t("task")}</label><input id="task" placeholder="Example: Revise chapter 3"></div>
-  <div class="field"><label for="taskDate">${t("date")}</label><input id="taskDate" type="date"></div>
-  <button class="btn" onclick="savePlan()">${t("addTask")}</button><hr><h3>${t("tasks")}</h3><div id="planList"></div>`;
-  renderPlans();
- }
- if(shouldScroll)document.getElementById("workspace").scrollIntoView({behavior:"smooth"});
-}
-function closeFeature(){
- document.getElementById("workspace").classList.add("hidden");
- currentFeature="";
- document.getElementById("features").scrollIntoView({behavior:"smooth"});
+function t(key) {
+  const lang = document.getElementById("language").value;
+  return (translations[lang] && translations[lang][key]) ||
+         translations.en[key] || key;
 }
 
-/* REAL AI CONNECTION: sends the question to your local server.
-   Keep the Gemini API key in server-side .env, never in this HTML. */
-async function askDoubt(){
- const q=document.getElementById("question").value.trim();
- if(!q){alert(t("enterQuestion"));return}
- const subject=document.getElementById("subject").value;
- const result=document.getElementById("doubtResult");
- const button=document.getElementById("askButton");
- result.classList.remove("hidden");
- result.textContent="AI is thinking...";
- button.disabled=true;
- button.textContent="Please wait...";
- try{
-  const response=await fetch("/api/ask",{
-   method:"POST",
-   headers:{"Content-Type":"application/json"},
-   body:JSON.stringify({question:q,subject:subject})
+function changeLanguage() {
+  const lang = document.getElementById("language").value;
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-t]").forEach(el => {
+    el.textContent = t(el.dataset.t);
   });
-  const data=await response.json();
-  if(!response.ok)throw new Error(data.error||"Request failed");
-  result.textContent=data.answer||"No answer received. Please try again.";
- }catch(error){
-  result.textContent="AI connection error: "+error.message+
-   "\n\nCheck that your StudentMate AI server is running, then open http://localhost:3000";
- }finally{
-  button.disabled=false;
-  button.textContent=t("ask");
- }
+
+  if (currentFeature) openFeature(currentFeature, false);
 }
 
-function saveRevision(){
- const topic=document.getElementById("topic").value.trim();
- const notes=document.getElementById("notes").value.trim();
- if(!topic||!notes){alert(t("fillFields"));return}
- const list=readStore("sm_revisions");
- list.unshift({id:Date.now(),topic,notes});
- if(writeStore("sm_revisions",list)){
-  document.getElementById("topic").value="";
-  document.getElementById("notes").value="";
-  renderRevisions();alert(t("saved"));
- }
-}
-function renderRevisions(){
- const el=document.getElementById("revisionList");if(!el)return;
- const list=readStore("sm_revisions");
- el.innerHTML=list.length?"":`<p>${t("noNotes")}</p>`;
- list.forEach(item=>{
-  const box=document.createElement("div");box.className="item";
-  const h=document.createElement("h4");h.textContent=item.topic;
-  const p=document.createElement("p");p.textContent=item.notes;
-  const b=document.createElement("button");b.className="btn secondary small";b.textContent=t("remove");
-  b.onclick=()=>{writeStore("sm_revisions",readStore("sm_revisions").filter(x=>x.id!==item.id));renderRevisions()};
-  box.append(h,p,b);el.append(box);
- });
-}
-function saveFlashcard(){
- const question=document.getElementById("flashQ").value.trim();
- const answer=document.getElementById("flashA").value.trim();
- if(!question||!answer){alert(t("fillFields"));return}
- const list=readStore("sm_flashcards");
- list.unshift({id:Date.now(),question,answer});
- if(writeStore("sm_flashcards",list)){
-  document.getElementById("flashQ").value="";
-  document.getElementById("flashA").value="";
-  renderFlashcards();alert(t("saved"));
- }
-}
-function renderFlashcards(){
- const el=document.getElementById("flashList");if(!el)return;
- const list=readStore("sm_flashcards");
- el.innerHTML=list.length?"":`<p>${t("noCards")}</p>`;
- list.forEach(item=>{
-  const box=document.createElement("div");box.className="item";
-  const h=document.createElement("h4");h.textContent=item.question;
-  const p=document.createElement("p");p.className="hidden";p.textContent=item.answer;
-  const actions=document.createElement("div");actions.className="item-actions";
-  const reveal=document.createElement("button");reveal.className="btn secondary small";reveal.textContent=t("reveal");
-  reveal.onclick=()=>{p.classList.toggle("hidden");reveal.textContent=p.classList.contains("hidden")?t("reveal"):t("hideAnswer")};
-  const del=document.createElement("button");del.className="btn secondary small";del.textContent=t("remove");
-  del.onclick=()=>{writeStore("sm_flashcards",readStore("sm_flashcards").filter(x=>x.id!==item.id));renderFlashcards()};
-  actions.append(reveal,del);box.append(h,p,actions);el.append(box);
- });
-}
-function savePlan(){
- const task=document.getElementById("task").value.trim();
- const date=document.getElementById("taskDate").value;
- if(!task){alert(t("fillTask"));return}
- const list=readStore("sm_plans");
- list.unshift({id:Date.now(),task,date,done:false});
- if(writeStore("sm_plans",list)){
-  document.getElementById("task").value="";
-  document.getElementById("taskDate").value="";
-  renderPlans();alert(t("saved"));
- }
-}
-function renderPlans(){
- const el=document.getElementById("planList");if(!el)return;
- const list=readStore("sm_plans");
- el.innerHTML=list.length?"":`<p>${t("noTasks")}</p>`;
- list.forEach(item=>{
-  const box=document.createElement("div");box.className="item"+(item.done?" done":"");
-  const h=document.createElement("h4");h.textContent=item.task;
-  const p=document.createElement("p");p.textContent=item.date||"No date set";
-  const actions=document.createElement("div");actions.className="item-actions";
-  const toggle=document.createElement("button");toggle.className="btn secondary small";toggle.textContent=item.done?t("undo"):t("complete");
-  toggle.onclick=()=>{const all=readStore("sm_plans");const found=all.find(x=>x.id===item.id);if(found)found.done=!found.done;writeStore("sm_plans",all);renderPlans()};
-  const del=document.createElement("button");del.className="btn secondary small";del.textContent=t("remove");
-  del.onclick=()=>{writeStore("sm_plans",readStore("sm_plans").filter(x=>x.id!==item.id));renderPlans()};
-  actions.append(toggle,del);box.append(h,p,actions);el.append(box);
- });
-}
-</script>
-
-<!-- StudentMate AI Feedback Button -->
-<div style="text-align:center; margin:24px 0; padding:16px;">
-  <a
-    href="https://docs.google.com/forms/d/e/1FAIpQLSd-Ln2pfDq3jbUtU9obDKM2baSFMN16zycvYxQszZu_TRewIw/viewform"
-    target="_blank"
-    rel="noopener noreferrer"
-    style="
-      display:inline-block;
-      padding:12px 24px;
-      background:#7c5cff;
-      color:white;
-      text-decoration:none;
-      border-radius:12px;
-      font-size:16px;
-      font-weight:bold;
-    "
-  >
-    💬 Send Feedback
-  </a>
-  <p style="font-size:13px; opacity:0.75; margin-top:8px;">
-    Help us make StudentMate AI better!
-  </p>
-</div>
-<footer style="text-align:center; padding:25px 10px; margin-top:40px; color:#888; font-size:14px;">
-  <p>Made with ❤️</p>
-  <p>Created by <strong style="color:#7c5cff;">Sailesh</strong></p>
-  <p>© 2026 StudentMate AI</p>
-</footer>
-
-<script>
-function formatAIAnswer(text) {
-  const safeText = String(text)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-
-  return safeText
-    .replace(/^### (.+)$/gm, "<strong>📌 $1</strong>")
-    .replace(/^## (.+)$/gm, "<strong>✨ $1</strong>")
-    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-    .replace(/^\s*[-*] (.+)$/gm, "• $1")
-    .replace(/\n/g, "<br>");
+function readStore(key) {
+  try {
+    return JSON.parse(localStorage.getItem(key) || "[]");
+  } catch {
+    return [];
+  }
 }
 
-document.getElementById("aiChatForm").addEventListener("submit", async function(event) {
-  event.preventDefault();
+function writeStore(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch {
+    alert("Could not save. Browser storage may be full or disabled.");
+    return false;
+  }
+}
 
-  const input = document.getElementById("aiChatInput");
-  const messages = document.getElementById("aiChatMessages");
-  const question = input.value.trim();
+let currentFeature = "";
+let activeChatId = null;
 
-  if (!question) return;
+function openFeature(type, shouldScroll = true) {
+  currentFeature = type;
+  const workspace = document.getElementById("workspace");
+  const title = document.getElementById("workspaceTitle");
+  const desc = document.getElementById("workspaceDesc");
+  const content = document.getElementById("workspaceContent");
 
-  const userMsg = document.createElement("p");
-  userMsg.textContent = "🧑 You: " + question;
-  messages.appendChild(userMsg);
-  input.value = "";
+  workspace.classList.remove("hidden");
+  content.innerHTML = "";
 
-  const reply = document.createElement("div");
-  reply.textContent = "🤖 StudentMate AI is thinking...";
-  messages.appendChild(reply);
+  if (type === "chat") {
+    title.textContent = t("chatTitle");
+    desc.textContent = t("chatDescFull");
+    content.innerHTML = `
+      <div id="chatMessages" class="chat-messages"></div>
+      <div class="field">
+        <label for="chatQuestion">${t("question")}</label>
+        <textarea id="chatQuestion" placeholder="${t("chatPlaceholder")}"></textarea>
+      </div>
+      <button class="btn" id="sendChatButton" onclick="sendChatMessage()">${t("send")}</button>
+    `;
 
-  const button = this.querySelector("button");
+    const chats = readStore("sm_chats");
+    const chat = chats.find(c => c.id === activeChatId);
+    renderChatMessages(chat ? chat.messages : []);
+  }
+
+  else if (type === "doubt") {
+    title.textContent = t("doubtTitle");
+    desc.textContent = t("doubtDescFull");
+    content.innerHTML = `
+      <div class="field">
+        <label for="subject">${t("subject")}</label>
+        <select id="subject">
+          <option>Computer Science</option>
+          <option>Mathematics</option>
+          <option>Physics</option>
+          <option>Chemistry</option>
+          <option>English</option>
+          <option>Tamil</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="question">${t("question")}</label>
+        <textarea id="question" placeholder="${t("chatPlaceholder")}"></textarea>
+      </div>
+      <button class="btn" id="askButton" onclick="askDoubt()">${t("ask")}</button>
+      <div id="doubtResult" class="result hidden"></div>
+    `;
+  }
+
+  else if (type === "planner") {
+    title.textContent = t("plannerTitle");
+    desc.textContent = t("plannerDescFull");
+    content.innerHTML = `
+      <div class="field">
+        <label for="task">${t("task")}</label>
+        <input id="task" placeholder="Example: Study chapter 3">
+      </div>
+      <div class="field">
+        <label for="taskDate">${t("date")}</label>
+        <input id="taskDate" type="date">
+      </div>
+      <button class="btn" onclick="savePlan()">${t("addTask")}</button>
+      <hr>
+      <h3>${t("tasks")}</h3>
+      <div id="planList"></div>
+    `;
+    renderPlans();
+  }
+
+  if (shouldScroll) {
+    workspace.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+function closeFeature() {
+  document.getElementById("workspace").classList.add("hidden");
+  currentFeature = "";
+  document.getElementById("features").scrollIntoView({ behavior: "smooth" });
+}
+
+/* Existing AI endpoint: keep the API key on the server, never in this file. */
+async function askDoubt() {
+  const question = document.getElementById("question").value.trim();
+  if (!question) {
+    alert(t("enterQuestion"));
+    return;
+  }
+
+  const subject = document.getElementById("subject").value;
+  const result = document.getElementById("doubtResult");
+  const button = document.getElementById("askButton");
+
+  result.classList.remove("hidden");
+  result.textContent = t("thinking");
   button.disabled = true;
 
   try {
     const response = await fetch("/api/ask", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question, subject })
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Request failed");
+
+    result.textContent = data.answer || "No answer received. Please try again.";
+  } catch (error) {
+    result.textContent = t("chatError") + error.message +
+      "\n\nCheck that your StudentMate AI server is running.";
+  } finally {
+    button.disabled = false;
+    button.textContent = t("ask");
+  }
+}
+
+function renderChatMessages(messages) {
+  const box = document.getElementById("chatMessages");
+  if (!box) return;
+
+  box.innerHTML = "";
+
+  if (!messages.length) {
+    const welcome = document.createElement("p");
+    welcome.textContent = t("chatWelcome");
+    box.appendChild(welcome);
+    return;
+  }
+
+  messages.forEach(message => {
+    const bubble = document.createElement("div");
+    bubble.className = "chat-bubble " +
+      (message.role === "user" ? "user" : "assistant");
+    bubble.textContent =
+      (message.role === "user" ? "You: " : "StudentMate AI: ") +
+      message.text;
+    box.appendChild(bubble);
+  });
+
+  box.scrollTop = box.scrollHeight;
+}
+
+async function sendChatMessage() {
+  const input = document.getElementById("chatQuestion");
+  const button = document.getElementById("sendChatButton");
+  if (!input || !button) return;
+
+  const question = input.value.trim();
+  if (!question) {
+    alert(t("enterQuestion"));
+    return;
+  }
+
+  const chats = readStore("sm_chats");
+  let chat = chats.find(c => c.id === activeChatId);
+
+  if (!chat) {
+    chat = { id: Date.now(), title: question.slice(0, 40), messages: [] };
+    chats.unshift(chat);
+    activeChatId = chat.id;
+  }
+
+  chat.messages.push({ role: "user", text: question });
+  input.value = "";
+  input.disabled = true;
+  button.disabled = true;
+  button.textContent = t("thinking");
+  renderChatMessages(chat.messages);
+
+  try {
+    const response = await fetch("/api/ask", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        question: question,
-        subject: "General"
+        subject: "General",
+        messages: chat.messages
       })
     });
 
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || "Request failed");
 
-    reply.innerHTML = formatAIAnswer(
-      data.answer || "No answer received. Please try again."
-    );
+    chat.messages.push({
+      role: "assistant",
+      text: data.answer || "No answer received."
+    });
+    writeStore("sm_chats", chats);
+    renderChatMessages(chat.messages);
   } catch (error) {
-    reply.textContent = "⚠️ Connection error: " + error.message;
+    chat.messages.pop();
+    chat.messages.push({
+      role: "assistant",
+      text: t("chatError") + error.message
+    });
+    renderChatMessages(chat.messages);
   } finally {
+    input.disabled = false;
     button.disabled = false;
-    messages.scrollTop = messages.scrollHeight;
+    button.textContent = t("send");
+    input.focus();
   }
-});
+}
+
+function savePlan() {
+  const taskInput = document.getElementById("task");
+  const dateInput = document.getElementById("taskDate");
+  const task = taskInput.value.trim();
+  const date = dateInput.value;
+
+  if (!task) {
+    alert(t("fillTask"));
+    return;
+  }
+
+  const plans = readStore("sm_plans");
+  plans.unshift({ id: Date.now(), task, date, done: false });
+
+  if (writeStore("sm_plans", plans)) {
+    taskInput.value = "";
+    dateInput.value = "";
+    renderPlans();
+    alert(t("saved"));
+  }
+}
+
+function renderPlans() {
+  const listElement = document.getElementById("planList");
+  if (!listElement) return;
+
+  const plans = readStore("sm_plans");
+  listElement.innerHTML = "";
+
+  if (!plans.length) {
+    listElement.textContent = t("noTasks");
+    listElement.className = "muted";
+    return;
+  }
+
+  listElement.className = "";
+
+  plans.forEach(item => {
+    const box = document.createElement("div");
+    box.className = "item" + (item.done ? " done" : "");
+
+    const heading = document.createElement("h4");
+    heading.textContent = item.task;
+
+    const date = document.createElement("p");
+    date.textContent = item.date || "No date set";
+
+    const actions = document.createElement("div");
+    actions.className = "item-actions";
+
+    const toggle = document.createElement("button");
+    toggle.className = "btn secondary small";
+    toggle.textContent = item.done ? t("undo") : t("complete");
+    toggle.onclick = () => {
+      const all = readStore("sm_plans");
+      const found = all.find(x => x.id === item.id);
+      if (found) found.done = !found.done;
+      writeStore("sm_plans", all);
+      renderPlans();
+    };
+
+    const remove = document.createElement("button");
+    remove.className = "btn secondary small";
+    remove.textContent = t("remove");
+    remove.onclick = () => {
+      writeStore("sm_plans", readStore("sm_plans").filter(x => x.id !== item.id));
+      renderPlans();
+    };
+
+    actions.append(toggle, remove);
+    box.append(heading, date, actions);
+    listElement.appendChild(box);
+  });
+}
 </script>
 </body>
 </html>
