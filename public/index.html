@@ -31,10 +31,12 @@ body {
     var(--bg);
   min-height: 100vh;
 }
+body.feature-open { overflow: hidden; }
 button, input, textarea, select { font: inherit; }
 button { cursor: pointer; }
 button:disabled { opacity: .6; cursor: wait; }
 a { color: inherit; text-decoration: none; }
+
 header {
   display: flex;
   justify-content: space-between;
@@ -50,6 +52,7 @@ header {
 }
 .logo { font-size: 21px; font-weight: 850; letter-spacing: -.7px; }
 .logo span { color: var(--cyan); }
+
 select, input, textarea {
   width: 100%;
   color: var(--text);
@@ -64,6 +67,7 @@ select:focus, input:focus, textarea:focus {
 }
 option { background: #11172a; }
 header select { width: auto; max-width: 150px; }
+
 main { width: min(1120px, 90%); margin: auto; }
 .hero {
   display: grid;
@@ -97,6 +101,7 @@ h1 {
 p { color: var(--muted); line-height: 1.75; }
 .hero-copy > p { max-width: 600px; font-size: 17px; }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 25px; }
+
 .btn {
   border: 1px solid transparent;
   border-radius: 12px;
@@ -112,6 +117,7 @@ p { color: var(--muted); line-height: 1.75; }
   border-color: var(--border);
 }
 .btn.small { padding: 10px 13px; font-size: 13px; }
+
 .hero-visual {
   position: relative;
   padding: 25px;
@@ -167,6 +173,7 @@ p { color: var(--muted); line-height: 1.75; }
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-12px) rotate(4deg); }
 }
+
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -181,10 +188,16 @@ p { color: var(--muted); line-height: 1.75; }
 }
 .stat strong { display: block; font-size: 17px; margin-bottom: 5px; }
 .stat span { color: var(--muted); font-size: 12px; }
+
 .section-title { margin: 48px 0 22px; }
 .section-title h2 { font-size: clamp(25px, 4vw, 34px); margin-bottom: 8px; }
 .section-title p { margin-top: 0; }
-.grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 16px;
+}
 .card, .workspace {
   background: linear-gradient(145deg, rgba(24,32,57,.94), rgba(12,17,34,.96));
   border: 1px solid var(--border);
@@ -208,11 +221,41 @@ p { color: var(--muted); line-height: 1.75; }
 .card.future {
   background: linear-gradient(145deg, rgba(26,25,55,.7), rgba(12,17,34,.9));
 }
-.workspace { margin: 34px 0 65px; scroll-margin-top: 90px; }
+
+/* Separate full-screen feature view */
+#workspace {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  z-index: 99999;
+  margin: 0;
+  padding: 28px max(5%, calc((100% - 900px) / 2));
+  border: none;
+  border-radius: 0;
+  background:
+    radial-gradient(ellipse at 10% 0%, #26306b 0, transparent 35%),
+    radial-gradient(ellipse at 95% 30%, #123b49 0, transparent 28%),
+    var(--bg);
+}
+#workspace.hidden { display: none !important; }
+#workspace:not(.hidden) { display: block; }
+#workspaceTitle { margin-top: 10px; }
+#workspaceDesc { margin-bottom: 25px; }
 .workspace h2 { margin-top: 0; }
+
 .field { margin: 17px 0; }
-.field label { display: block; margin-bottom: 8px; font-weight: 650; font-size: 14px; }
+.field label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 650;
+  font-size: 14px;
+}
 textarea { min-height: 120px; resize: vertical; }
+
 .result {
   margin-top: 18px;
   padding: 16px;
@@ -243,6 +286,7 @@ textarea { min-height: 120px; resize: vertical; }
 }
 .chat-bubble.user { background: rgba(124,92,255,.18); }
 .chat-bubble.assistant { background: rgba(128,128,128,.12); }
+
 .item {
   background: #0b1021;
   border: 1px solid var(--border);
@@ -258,6 +302,7 @@ textarea { min-height: 120px; resize: vertical; }
 .muted { color: var(--muted); font-size: 13px; }
 .hidden { display: none !important; }
 hr { border: 0; border-top: 1px solid var(--border); margin: 22px 0; }
+
 footer {
   text-align: center;
   padding: 30px 15px;
@@ -265,6 +310,7 @@ footer {
   color: var(--muted);
   font-size: 13px;
 }
+
 @media (max-width: 800px) {
   .hero { grid-template-columns: 1fr; padding-top: 55px; gap: 5px; }
   .hero-visual { min-height: 280px; }
@@ -278,6 +324,7 @@ footer {
   .grid, .stats { grid-template-columns: 1fr; }
   .card p { min-height: 0; }
   .workspace, .card { padding: 18px; }
+  #workspace { padding: 18px 5%; }
   .hero-visual { min-height: 250px; }
   .orb { width: 185px; height: 185px; }
 }
@@ -292,8 +339,8 @@ footer {
 </head>
 
 <body>
-<header>
-  <a class="logo" href="#home">StudentMate <span>AI ✦</span></a>
+<header id="siteHeader">
+  <a class="logo" href="#home" onclick="returnToHome(event)">StudentMate <span>AI ✦</span></a>
   <select id="language" aria-label="Language" onchange="changeLanguage()">
     <option value="en">English</option>
     <option value="ta">தமிழ்</option>
@@ -304,7 +351,7 @@ footer {
   </select>
 </header>
 
-<main>
+<main id="homeMain">
   <section class="hero" id="home">
     <div class="hero-copy">
       <span class="pill" data-t="tag">✦ YOUR AI LEARNING COMPANION</span>
@@ -312,13 +359,10 @@ footer {
         <span data-t="hero1">Your ideas.</span><br>
         <span class="gradient" data-t="hero2">AI-powered future.</span>
       </h1>
-      <p data-t="intro">
-        Meet a new way to learn. Ask questions, explore ideas and make every
-        study session count with your personal AI learning companion.
-      </p>
+      <p data-t="intro">Meet a new way to learn. Ask questions, explore ideas and make every study session count with your personal AI learning companion.</p>
       <div class="actions">
         <button class="btn" onclick="openFeature('chat')" data-t="start">Meet your AI →</button>
-        <button class="btn secondary" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})" data-t="explore">Explore platform</button>
+        <button class="btn secondary" onclick="scrollToFeatures()" data-t="explore">Explore platform</button>
       </div>
     </div>
 
@@ -386,21 +430,35 @@ footer {
         <div class="emoji">🌌</div>
         <h3 data-t="visionTitle">Learn Beyond Limits</h3>
         <p data-t="visionDesc">A student-first learning space built to grow with your ideas.</p>
-        <button class="btn small secondary" onclick="openFeature('chat')" data-t="exploreAI">Explore AI →</button>
+        <button class="btn small secondary" onclick="scrollToFeatures()" data-t="exploreAI">Explore AI →</button>
       </article>
     </div>
   </section>
 
-  <section id="workspace" class="workspace hidden" aria-live="polite">
+  <!-- One reusable full-screen view; URL stays unchanged -->
+  <section id="workspace" class="workspace hidden" aria-live="polite" aria-label="StudentMate feature">
+    <button class="btn secondary small" onclick="closeFeature()" data-t="back">← Back to home</button>
+    <hr>
     <h2 id="workspaceTitle">Your learning space</h2>
     <p id="workspaceDesc"></p>
     <div id="workspaceContent"></div>
-    <hr>
-    <button class="btn secondary" onclick="closeFeature()" data-t="back">← Back to home</button>
+  </section>
+
+  <section class="card" id="feedback" style="text-align:center; margin: 0 0 65px;">
+    <div class="section-title">
+      <span class="pill">HELP US IMPROVE</span>
+      <h2>💬 Student Feedback</h2>
+      <p>Your feedback helps us make StudentMate AI better for every student.</p>
+    </div>
+    <a class="btn"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSc2xoGpS6Aqw6NMsdS0Ui2PbM873oZIcrGxp_-JTc8cMlEZlQ/viewform"
+       target="_blank" rel="noopener noreferrer" style="display:inline-block;">
+      Share Your Feedback ↗
+    </a>
   </section>
 </main>
 
-<footer>
+<footer id="siteFooter">
   <div class="logo">StudentMate <span>AI ✦</span></div>
   <p data-t="footer">Built for curious minds. Learn a little every day.</p>
   <p>Made with ❤️ by <strong>Sailesh</strong></p>
@@ -500,11 +558,26 @@ function t(key) {
 function changeLanguage() {
   const lang = document.getElementById("language").value;
   document.documentElement.lang = lang;
+
   document.querySelectorAll("[data-t]").forEach(el => {
     el.textContent = t(el.dataset.t);
   });
 
   if (currentFeature) openFeature(currentFeature, false);
+}
+
+function scrollToFeatures() {
+  closeFeature(false);
+  document.getElementById("features").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+function returnToHome(event) {
+  if (event) event.preventDefault();
+  closeFeature(false);
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function readStore(key) {
@@ -529,18 +602,31 @@ let currentFeature = "";
 let activeChatId = null;
 
 function openFeature(type, shouldScroll = true) {
-  currentFeature = type;
   const workspace = document.getElementById("workspace");
   const title = document.getElementById("workspaceTitle");
   const desc = document.getElementById("workspaceDesc");
   const content = document.getElementById("workspaceContent");
 
+  if (!workspace || !title || !desc || !content) {
+    console.error("StudentMate AI workspace elements are missing.");
+    alert("Feature page could not open. Please refresh the website.");
+    return;
+  }
+
+  if (!["chat", "doubt", "planner"].includes(type)) {
+    console.error("Unknown feature:", type);
+    return;
+  }
+
+  currentFeature = type;
   workspace.classList.remove("hidden");
+  document.body.classList.add("feature-open");
   content.innerHTML = "";
 
   if (type === "chat") {
     title.textContent = t("chatTitle");
     desc.textContent = t("chatDescFull");
+
     content.innerHTML = `
       <div id="chatMessages" class="chat-messages"></div>
       <div class="field">
@@ -551,13 +637,20 @@ function openFeature(type, shouldScroll = true) {
     `;
 
     const chats = readStore("sm_chats");
-    const chat = chats.find(c => c.id === activeChatId);
+    let chat = chats.find(c => c.id === activeChatId);
+
+    if (!chat && chats.length) {
+      chat = chats[0];
+      activeChatId = chat.id;
+    }
+
     renderChatMessages(chat ? chat.messages : []);
   }
 
   else if (type === "doubt") {
     title.textContent = t("doubtTitle");
     desc.textContent = t("doubtDescFull");
+
     content.innerHTML = `
       <div class="field">
         <label for="subject">${t("subject")}</label>
@@ -583,6 +676,7 @@ function openFeature(type, shouldScroll = true) {
   else if (type === "planner") {
     title.textContent = t("plannerTitle");
     desc.textContent = t("plannerDescFull");
+
     content.innerHTML = `
       <div class="field">
         <label for="task">${t("task")}</label>
@@ -597,32 +691,44 @@ function openFeature(type, shouldScroll = true) {
       <h3>${t("tasks")}</h3>
       <div id="planList"></div>
     `;
+
     renderPlans();
   }
 
   if (shouldScroll) {
-    workspace.scrollIntoView({ behavior: "smooth", block: "start" });
+    workspace.scrollTop = 0;
   }
 }
 
-function closeFeature() {
-  document.getElementById("workspace").classList.add("hidden");
+function closeFeature(scrollHome = true) {
+  const workspace = document.getElementById("workspace");
+
+  workspace.classList.add("hidden");
+  document.body.classList.remove("feature-open");
   currentFeature = "";
-  document.getElementById("features").scrollIntoView({ behavior: "smooth" });
+
+  if (scrollHome) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 }
 
-/* Existing AI endpoint: keep the API key on the server, never in this file. */
+/* AI API calls use the existing Node.js backend. */
 async function askDoubt() {
-  const question = document.getElementById("question").value.trim();
+  const questionEl = document.getElementById("question");
+  const subjectEl = document.getElementById("subject");
+  const result = document.getElementById("doubtResult");
+  const button = document.getElementById("askButton");
+
+  if (!questionEl || !subjectEl || !result || !button) return;
+
+  const question = questionEl.value.trim();
+
   if (!question) {
     alert(t("enterQuestion"));
     return;
   }
 
-  const subject = document.getElementById("subject").value;
-  const result = document.getElementById("doubtResult");
-  const button = document.getElementById("askButton");
-
+  const subject = subjectEl.value;
   result.classList.remove("hidden");
   result.textContent = t("thinking");
   button.disabled = true;
@@ -635,7 +741,10 @@ async function askDoubt() {
     });
 
     const data = await response.json();
-    if (!response.ok) throw new Error(data.error || "Request failed");
+
+    if (!response.ok) {
+      throw new Error(data.error || "Request failed");
+    }
 
     result.textContent = data.answer || "No answer received. Please try again.";
   } catch (error) {
@@ -653,7 +762,7 @@ function renderChatMessages(messages) {
 
   box.innerHTML = "";
 
-  if (!messages.length) {
+  if (!messages || !messages.length) {
     const welcome = document.createElement("p");
     welcome.textContent = t("chatWelcome");
     box.appendChild(welcome);
@@ -662,11 +771,14 @@ function renderChatMessages(messages) {
 
   messages.forEach(message => {
     const bubble = document.createElement("div");
+
     bubble.className = "chat-bubble " +
       (message.role === "user" ? "user" : "assistant");
+
     bubble.textContent =
       (message.role === "user" ? "You: " : "StudentMate AI: ") +
       message.text;
+
     box.appendChild(bubble);
   });
 
@@ -676,9 +788,11 @@ function renderChatMessages(messages) {
 async function sendChatMessage() {
   const input = document.getElementById("chatQuestion");
   const button = document.getElementById("sendChatButton");
+
   if (!input || !button) return;
 
   const question = input.value.trim();
+
   if (!question) {
     alert(t("enterQuestion"));
     return;
@@ -688,12 +802,18 @@ async function sendChatMessage() {
   let chat = chats.find(c => c.id === activeChatId);
 
   if (!chat) {
-    chat = { id: Date.now(), title: question.slice(0, 40), messages: [] };
+    chat = {
+      id: Date.now(),
+      title: question.slice(0, 40),
+      messages: []
+    };
+
     chats.unshift(chat);
     activeChatId = chat.id;
   }
 
   chat.messages.push({ role: "user", text: question });
+
   input.value = "";
   input.disabled = true;
   button.disabled = true;
@@ -711,20 +831,24 @@ async function sendChatMessage() {
     });
 
     const data = await response.json();
-    if (!response.ok) throw new Error(data.error || "Request failed");
+
+    if (!response.ok) {
+      throw new Error(data.error || "Request failed");
+    }
 
     chat.messages.push({
       role: "assistant",
       text: data.answer || "No answer received."
     });
+
     writeStore("sm_chats", chats);
     renderChatMessages(chat.messages);
   } catch (error) {
-    chat.messages.pop();
     chat.messages.push({
       role: "assistant",
       text: t("chatError") + error.message
     });
+
     renderChatMessages(chat.messages);
   } finally {
     input.disabled = false;
@@ -737,6 +861,9 @@ async function sendChatMessage() {
 function savePlan() {
   const taskInput = document.getElementById("task");
   const dateInput = document.getElementById("taskDate");
+
+  if (!taskInput || !dateInput) return;
+
   const task = taskInput.value.trim();
   const date = dateInput.value;
 
@@ -746,7 +873,12 @@ function savePlan() {
   }
 
   const plans = readStore("sm_plans");
-  plans.unshift({ id: Date.now(), task, date, done: false });
+  plans.unshift({
+    id: Date.now(),
+    task,
+    date,
+    done: false
+  });
 
   if (writeStore("sm_plans", plans)) {
     taskInput.value = "";
@@ -787,10 +919,13 @@ function renderPlans() {
     const toggle = document.createElement("button");
     toggle.className = "btn secondary small";
     toggle.textContent = item.done ? t("undo") : t("complete");
+
     toggle.onclick = () => {
       const all = readStore("sm_plans");
       const found = all.find(x => x.id === item.id);
+
       if (found) found.done = !found.done;
+
       writeStore("sm_plans", all);
       renderPlans();
     };
@@ -798,8 +933,13 @@ function renderPlans() {
     const remove = document.createElement("button");
     remove.className = "btn secondary small";
     remove.textContent = t("remove");
+
     remove.onclick = () => {
-      writeStore("sm_plans", readStore("sm_plans").filter(x => x.id !== item.id));
+      const remaining = readStore("sm_plans").filter(
+        x => x.id !== item.id
+      );
+
+      writeStore("sm_plans", remaining);
       renderPlans();
     };
 
